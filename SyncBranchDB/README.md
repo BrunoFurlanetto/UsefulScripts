@@ -3,7 +3,7 @@ It explains the purpose of your project, folder structure, environment setup, an
 
 ---
 
-```markdown
+
 # 🧩 SyncBranchDB
 
 **SyncBranchDB** is a lightweight automation tool designed to keep your development branches and databases isolated and in sync.  
@@ -24,8 +24,7 @@ Each Git branch automatically gets its own cloned database based on the main bra
 
 ## 🗂️ Project Structure
 
-```
-
+```text
 SyncBranchDB/
 ├── .githooks/                # Git hooks directory (if using custom hooks)
 │   └── post-checkout         # Hook that triggers after branch switch
@@ -43,8 +42,7 @@ SyncBranchDB/
 ├── .env                      # Environment configuration file
 ├── main.py                   # Main entry point (used by Git hook or manual run)
 └── README.md                 # Project documentation
-
-````
+```
 
 ---
 
@@ -214,9 +212,7 @@ Feel free to use, modify, and integrate it into your own workflow.
 **Bruno Furlanetto**
 Developer | Automation Enthusiast
 
-```
 
 ---
 
 Would you like me to adjust the README to include **colored output examples** (using ANSI codes for terminal logs) or keep it minimal like this version?
-```
