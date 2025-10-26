@@ -1,3 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo "🚀 Git post-checkout hook triggered — syncing branch database..."
-python3 scripts/sync_branch_db.py
+
+# Detect repo root based on this hook’s location
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# Activate virtualenv
+VENV_DIR="$REPO_ROOT/.venv"
+if [ -d "$VENV_DIR" ]; then
+    echo "🐍 Activating virtualenv at $VENV_DIR..."
+    source "$VENV_DIR/Scripts/activate"
+else
+    echo "⚠️  No virtualenv found at $VENV_DIR — using system Python."
+fi
+
+# Run the correct script path
+PY_SCRIPT="$REPO_ROOT/SyncBranchDB/SyncBranchDB/main.py"
+
+if [ -f "$PY_SCRIPT" ]; then
+    python "$PY_SCRIPT"
+else
+    echo "❌ Script not found at $PY_SCRIPT"
+fi
+
+echo "✅ post-checkout finished."

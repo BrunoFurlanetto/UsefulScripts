@@ -8,10 +8,14 @@ Can be executed manually or automatically through a Git hook (post-checkout).
 """
 
 import sys
-from SyncBranchDB.SyncBranchDB.branch_db_manager.env_utils import load_env
-from SyncBranchDB.SyncBranchDB.branch_db_manager.git_utils import get_current_branch
-from SyncBranchDB.SyncBranchDB.branch_db_manager.db_manager import db_exists, create_db_from_main
-from SyncBranchDB.SyncBranchDB.branch_db_manager.logger import log_info, log_warn, log_success, log_error
+from branch_db_manager.env_utils import load_env
+from branch_db_manager.git_utils import get_current_branch
+from branch_db_manager.db_manager import db_exists, create_db_from_main
+from branch_db_manager.logger import log_info, log_warn, log_success, log_error
+
+# -*- coding: utf-8 -*-
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 
 def main():
@@ -29,7 +33,7 @@ def main():
             sys.exit(0)
 
         # 4️⃣ Build branch database name
-        branch_db = f"{config['DB_PREFIX']}{branch}"
+        branch_db = f"{config['DB_PREFIX']}-{branch}"
         log_info(f"Target database: {branch_db}")
 
         # 5️⃣ Check if database already exists

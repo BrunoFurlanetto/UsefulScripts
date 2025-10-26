@@ -16,6 +16,7 @@ def load_env():
     }
 
     missing = [k for k, v in config.items() if not v]
+
     if missing:
         raise ValueError(f"Missing variables in .env: {', '.join(missing)}")
 
