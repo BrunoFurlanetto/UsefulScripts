@@ -1,4 +1,6 @@
 import subprocess
+import tempfile
+
 import psycopg2
 import os
 from .logger import log_info, log_success
@@ -30,6 +32,7 @@ def run_psql(cmd, config):
             "-U", config["DB_USER"],
             "-h", config["DB_HOST"],
             "-p", str(config["DB_PORT"]),
+            "-d", "postgres",
             "-c", cmd,
         ],
         check=True,
@@ -39,8 +42,8 @@ def run_psql(cmd, config):
 
 def create_db_from_main(branch_db, config):
     """Clone the main database into a new branch database"""
-    main_db = f"{config['DB_PREFIX']}{config['MAIN_BRANCH']}"
-    dump_file = f"/tmp/{main_db}.dump"
+    main_db = f"{config['DB_PREFIX']}-{config['MAIN_BRANCH']}"
+    dump_file = os.path.join(tempfile.gettempdir(), f"{main_db}.dump")
 
     log_info(f"📦 Creating database '{branch_db}' from '{main_db}'...")
 
